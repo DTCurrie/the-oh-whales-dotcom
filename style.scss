@@ -1,7 +1,7 @@
-@import "../../node_modules/normalize.css/normalize.css";
-$bg: #5CFFED;
-$fg: #FF8F5C;
-$wave: #1DB2A2;
+@import "normalize.css/normalize.css";
+$bg: #5cffed;
+$fg: #ff8f5c;
+$wave: #1db2a2;
 $media-xs: "(max-width: 549px)";
 $media-sm: "(min-width: 550px) and (max-width: 749px)";
 $media-md: "(min-width: 750px) and (max-width: 999px)";
@@ -34,23 +34,19 @@ $wave-left: -5%;
     @media #{$media-xs} {
       @content;
     }
-  } @else
-  if $media == "sm" {
+  } @else if $media == "sm" {
     @media #{$media-sm} {
       @content;
     }
-  } @else
-  if $media == "md" {
+  } @else if $media == "md" {
     @media #{$media-md} {
       @content;
     }
-  } @else
-  if $media == "lg" {
+  } @else if $media == "lg" {
     @media #{$media-lg} {
       @content;
     }
-  } @else
-  if $media == "xl" {
+  } @else if $media == "xl" {
     @media #{$media-xl} {
       @content;
     }
@@ -67,7 +63,8 @@ body {
   font-size: 1.5em;
   line-height: 1.6;
   font-weight: 400;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
 
 body,
@@ -92,7 +89,13 @@ html {
   &-helper {
     position: relative;
     display: inline-block;
-    height: calc(50% - (#{$img-xl-height/2 + $icon-size + (($wave-rows - 1)*($wave-min-size/2))/2}));
+    height: calc(
+      50% -
+        (
+          #{$img-xl-height * 0.5 + $icon-size +
+            (($wave-rows - 1) * ($wave-min-size * 0.5)) * 0.5}
+        )
+    );
     vertical-align: middle;
     z-index: 1000;
     @include transition(height $animation-time);
@@ -109,7 +112,12 @@ html {
   max-height: $img-xl-height;
   vertical-align: middle;
   z-index: 1000;
-  @include transition(width $animation-time, height $animation-time, max-width $animation-time, max-height $animation-time);
+  @include transition(
+    width $animation-time,
+    height $animation-time,
+    max-width $animation-time,
+    max-height $animation-time
+  );
 }
 @mixin responsive-frame($media-size, $img-width, $img-height) {
   @include media($media-size) {
@@ -117,7 +125,13 @@ html {
       max-width: $img-width;
 
       &-helper {
-        height: calc(50% - (#{$img-height/2 + $icon-size + (($wave-rows - 1)*($wave-min-size/2))/2}));
+        height: calc(
+          50% -
+            (
+              #{$img-height * 0.5 + $icon-size +
+                (($wave-rows - 1) * ($wave-min-size * 0.5)) * 0.5}
+            )
+        );
       }
     }
 
@@ -136,7 +150,7 @@ html {
 .social-media {
   position: relative;
   display: block;
-  margin: #{$icon-size/2} auto;
+  margin: #{$icon-size * 0.5} auto;
   width: 100%;
   height: auto;
   text-align: center;
@@ -144,17 +158,17 @@ html {
   @include transition(font-size $animation-time);
   @include media("xs") {
     font-size: 0.5em;
-    margin: #{$icon-size/4} auto;
+    margin: #{$icon-size * 0.25} auto;
   }
 
   @include media("sm") {
     font-size: 0.75em;
-    margin: #{$icon-size/4} auto;
+    margin: #{$icon-size * 0.25} auto;
   }
 
   @include media("md") {
     font-size: 0.75em;
-    margin: #{$icon-size/4} auto;
+    margin: #{$icon-size * 0.25} auto;
   }
 
   a {
@@ -201,7 +215,9 @@ html {
     z-index: 0;
     @mixin wave-row($selector, $offset, $animation-time, $z-index, $color) {
       &.#{$selector} {
-        top: calc(100% - ((#{$wave-rows} - #{$offset}) * #{$wave-min-size/2}));
+        top: calc(
+          100% - ((#{$wave-rows} - #{$offset}) * #{$wave-min-size * 0.5})
+        );
         animation: slidein $animation-time infinite alternate;
         z-index: $z-index;
 
